@@ -8,7 +8,7 @@ var box1, pig1, pig2;
 var backgroundImg,platform;
 var slingshot;
 var gameState = "START";
-var bg;
+var bg = "sprites/bg.png";
 var score = 0;
 
 
@@ -93,9 +93,9 @@ function draw(){
     slingshot.display();
 }
 function mouseDragged() {
-   if(gameState!=="LANCADO"){
+   //if(gameState!=="LANCADO"){
     Matter.Body.setPosition(bird.body,{x:mouseX,y:mouseY});
-   } 
+  //} 
     
 }
 function mouseReleased() {
@@ -104,7 +104,9 @@ function mouseReleased() {
 }
 function keyPressed(){
     if(keyCode === 32){
-        //slingshot.attach(bird.body);
+        slingshot.attach(bird.body);
+        bird.trajectory = [];
+        Matter.Body.setPosition(bird.body,{x:mouseX,y:mouseY});
      // gameState="START";  
     
     }
@@ -116,9 +118,9 @@ async function getBackgroundIMG(){
     var hour = datetime.slice(11,13);
     console.log(hour);
     if (hour>=06&&hour<=18) {
-      bg = "sprites/bg.png";  
-    } else {
       bg = "sprites/bg2.jpg";  
+    } else {
+      bg = "sprites/bg.png";  
     }
     backgroundImg = loadImage(bg);
 }
